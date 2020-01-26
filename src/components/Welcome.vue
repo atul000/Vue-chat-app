@@ -2,23 +2,30 @@
   <div class="welcome container">
     <div class="card">
       <div class="card-content center-align">
-        <h2 class="teal-text">Welcome</h2>
+        <h2 class="blue-text">Welcome To Just Chat</h2>
+        <img class="chat" src="@/assets/chat1.jpg" />
+
         <form @submit.prevent="enterChat">
           <label for="name">Enter your name:</label>
           <input type="text" name="name" v-model="name" />
           <p v-if="feedback" class="red-text">
             {{ feedback }}
           </p>
-          <button class="btn teal">Enter Chat</button>
+          <button class="btn blue">Enter Chat</button>
         </form>
       </div>
     </div>
+    <Love />
   </div>
 </template>
 
 <script>
+import Love from "@/components/Love";
 export default {
   name: "Welcome",
+  components: {
+    Love
+  },
   data() {
     return {
       name: null,
@@ -47,5 +54,18 @@ export default {
 }
 .welcome button {
   margin: 30px auto;
+}
+.love {
+  align-content: center;
+  margin: 30px auto;
+
+  font-weight: bold;
+  font-size: 20px;
+  font-family: "Bangers", cursive;
+}
+
+img {
+  width: 200px;
+  height: 150px;
 }
 </style>
