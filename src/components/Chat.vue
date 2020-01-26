@@ -3,11 +3,11 @@
     <h2 class="center blue-text">Just Chat</h2>
     <div class="card">
       <div class="card-content">
-        <ul class="messages">
-          <li>
-            <span class="blue-text">Name</span>
-            <span class="grey-text text-darken-3">message</span>
-            <span class="grey-text time">time</span>
+        <ul class="messages" v-chat-scroll>
+          <li v-for="message in messages" :key="message.id">
+            <span class="blue-text">{{ message.name }}{{ " : " }}</span>
+            <span class="grey-text text-darken-3">{{ message.content }}</span>
+            <span class="grey-text time">{{ message.timestamp }}</span>
           </li>
         </ul>
       </div>
@@ -20,6 +20,9 @@
 
 <script>
 import NewMessage from "@/components/NewMessage";
+import db from "@/firebase/init";
+import moment from "moment";
+
 export default {
   name: "Chat",
   props: ["name"],
@@ -27,7 +30,25 @@ export default {
     NewMessage
   },
   data() {
-    return {};
+    return {
+      messages: []
+    };
+  },
+  created() {
+    let ref = db.collection("messages").orderBy("timestamp");
+    ref.onSnapshot(snapshot => {
+      snapshot.docChanges().forEach(change => {
+        if (change.type == "added") {
+          let doc = change.doc;
+          this.messages.push({
+            id: doc.id,
+            name: doc.data().name,
+            content: doc.data().content,
+            timestamp: moment(doc.data().timestamp).format("lll")
+          });
+        }
+      });
+    });
   }
 };
 </script>
@@ -42,6 +63,22 @@ export default {
 }
 .chat .time {
   display: block;
-  font-size: 1.2em;
+  font-size: 0.9em;
+}
+.messages {
+  max-height: 300px;
+  overflow: auto;
+}
+
+.messages::-webkit-scrollbar {
+  widows: 3px;
+}
+
+.messages::-webkit-scrollbar-track {
+  background: #ddd;
+}
+
+.messages::-webkit-slider-thumb {
+  background: #aaa;
 }
 </style>

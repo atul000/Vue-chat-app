@@ -7,8 +7,7 @@
 
 <script>
 export default {
-  name: "Love",
-  data() {}
+  name: "Love"
 };
 </script>
 
