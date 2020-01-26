@@ -1,4 +1,4 @@
-# chat-app
+# Just Chat
 
 ## Project setup
 ```
