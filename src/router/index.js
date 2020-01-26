@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import Vue from "vue";
 import VueRouter from "vue-router";
 import Welcome from "@/components/Welcome";
@@ -15,7 +16,14 @@ const routes = [
     path: "/chat",
     name: "Chat",
     component: Chat,
-    props: true
+    props: true,
+    beforeEnter: (to, from, next) => {
+      if (to.params.name) {
+        next();
+      } else {
+        next({ name: "Welcome" });
+      }
+    }
   }
 ];
 
