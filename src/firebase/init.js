@@ -2,7 +2,7 @@ import firebase from "firebase";
 import "firebase/firestore";
 
 var firebaseConfig = {
-  apiKey: "",
+  apiKey: "AIzaSyCnr-J6fPjbrgH_8i7DD4A4HVDkRhDa0RM",
   authDomain: "contactapp-57bc8.firebaseapp.com",
   databaseURL: "https://contactapp-57bc8.firebaseio.com",
   projectId: "contactapp-57bc8",
