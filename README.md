@@ -1,4 +1,6 @@
-# Just Chat
+# Just-Chat
+
+## VUE-PROJECT
 
 ## Project setup
 ```
